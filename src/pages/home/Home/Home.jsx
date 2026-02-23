@@ -8,7 +8,7 @@ import FeaturesSection from '../FeaturesSection/FeaturesSection'
 import SatisfactionBanner from '../SatisfactionBanner/SatisfactionBanner'
 
 
-const data = fetch('reviews.json').then(res => res.json()).then(data => data).catch(err => console.log(err));
+const data = fetch('/reviews.json').then(res => res.json()).then(data => data).catch(err => console.log(err));
 
 
 export const Home = () => {

@@ -23,7 +23,6 @@ export const Brands = () => {
         slidesPerView={2}          
         spaceBetween={30}
         centeredSlides={true}
-        grabCursor={true}
         loop={true}                    
         loopAdditionalSlides={2}        
         loopedSlides={null}             

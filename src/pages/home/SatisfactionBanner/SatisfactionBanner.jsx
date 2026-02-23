@@ -1,9 +1,8 @@
 // sections/SatisfactionBanner.jsx
 import React from 'react';
 
-// Your images (update paths as needed)
-import heroBg from '../../../assets/location-merchant.png';      // subtle wave/location overlay (optional)
-import parcelIllustration from '../../../assets/be-a-merchant-bg.png'; // main stacked parcels + pin
+import heroBg from '../../../assets/location-merchant.png';      
+import parcelIllustration from '../../../assets/be-a-merchant-bg.png'; 
 
 export default function SatisfactionBanner() {
     return (
@@ -58,7 +57,7 @@ export default function SatisfactionBanner() {
                     </div>
                 </div>
 
-                {/* Illustration - Right Side */}
+               
 
             </div>
 
