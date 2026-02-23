@@ -17,10 +17,11 @@ export const Reviews = ({reviews}) => {
         centeredSlides={true}
         slidesPerView={3}
         coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
+          rotate: 30,
+          stretch: '50%',
+          depth: 200,
           modifier: 1,
+          scale:0.75,
           slideShadows: true,
         }}
         autoplay={{

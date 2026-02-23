@@ -20,17 +20,17 @@ export const Brands = () => {
     <div className="brands-container py-10 bg-gray-50">
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
-        slidesPerView={2}          // ← এটা খুব জরুরি লুপিং-এর জন্য
+        slidesPerView={2}          
         spaceBetween={30}
         centeredSlides={true}
         grabCursor={true}
-        loop={true}                     // লুপ চালু
-        loopAdditionalSlides={2}        // ← এটা যোগ করো (লুপিং স্মুথ করতে)
-        loopedSlides={null}             // null রাখো
+        loop={true}                    
+        loopAdditionalSlides={2}        
+        loopedSlides={null}             
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
-          pauseOnMouseEnter: false,     // হোভারে পজ না করুক (চাইলে true করো)
+          pauseOnMouseEnter: false,    
         }}
         breakpoints={{
           640: { slidesPerView: 3, spaceBetween: 30 },

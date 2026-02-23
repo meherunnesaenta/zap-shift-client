@@ -31,13 +31,13 @@ export const ReviewsCard = ({ review }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] border border-gray-100">
+    <div className="bg-white rounded-2xl shadow-lg shadow-secondary overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] border border-gray-100">
 
-      <div className="p-6 flex items-center gap-4 border-b border-gray-100">
+      <div className="p-6 flex items-center gap-4 border-b border-primary">
         <img
           src={user_photoURL}
           alt={userName}
-          className="w-14 h-14 rounded-full object-cover border-2 border-gray-200"
+          className="w-14 h-14 rounded-full object-cover border-3 border-primary"
         />
         <div>
           <h3 className="font-semibold text-lg text-gray-800">{userName}</h3>
@@ -50,7 +50,7 @@ export const ReviewsCard = ({ review }) => {
 
    
       <div className="p-6">
-        <p className="text-gray-700 leading-relaxed italic">
+        <p className="text-secondary leading-relaxed italic">
           "{reviewText}"
         </p>
       </div>

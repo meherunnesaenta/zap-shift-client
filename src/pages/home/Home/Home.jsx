@@ -4,6 +4,7 @@ import HowItWorks from '../../../components/Home/HowItWorks'
 import { OurServices } from '../../../components/Home/OurServices'
 import { Brands } from '../Brands/Brands'
 import { Reviews } from '../Reviews/Reviews'
+import FeaturesSection from '../FeaturesSection/FeaturesSection'
 
 
 const data = fetch('reviews.json').then(res => res.json()).then(data => data).catch(err => console.log(err));
@@ -18,6 +19,7 @@ export const Home = () => {
         <HowItWorks> </HowItWorks>
         <OurServices> </OurServices>
         <Brands></Brands>
+        <FeaturesSection></FeaturesSection>
         <Reviews reviews={data}></Reviews>
     </div>
   )
