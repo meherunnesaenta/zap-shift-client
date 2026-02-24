@@ -3,14 +3,30 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import { SocialLogin } from '../Auth/SocialLogin/SocialLogin';
+import axios from 'axios';
 
 export const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { registerUser } = useAuth();
+    const { registerUser,updatePhoto } = useAuth();
     const handleRegister = async (data) => {
+        const profileImg=data.photo[0];
         registerUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
+                const formData =new FormData()
+                formData.append('image',profileImg);
+                const imageApiUrl=`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_image_host_key}`;
+                axios.post(imageApiUrl,formData)
+                .then(res=>{
+                    const userProfile ={
+                        displayName : data.name,
+                        photoUrl : res.data.data.url
+                    }
+                    updatePhoto(userProfile)
+                    .then()
+                    .catch(error=>console.log(error));
+                })
+                
                 console.log(user);
             })
             .catch(err => console.log(err))
@@ -24,6 +40,24 @@ export const Register = () => {
                     </h2>
 
                     <form onSubmit={handleSubmit(handleRegister)} className="space-y-6">
+                        
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text font-medium text-base-content">Full Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter your full name "
+                                className={`input input-bordered w-full focus:input-primary focus:ring-2 focus:ring-primary/30 transition-all ${errors.name ? "input-error" : ""
+                                    }`}
+                                {...register("name", { required: true })}
+                            />
+                            {errors.email?.type === "required" && (
+                                <span className="text-error text-sm mt-1.5 block">
+                                    Email is required
+                                </span>
+                            )}
+                        </div>
                         {/* Email */}
                         <div className="form-control">
                             <label className="label">
@@ -42,6 +76,7 @@ export const Register = () => {
                                 </span>
                             )}
                         </div>
+                        <input type="file" {...register('photo',{required:true})} className="file-input file-input-sm " />
 
                         {/* Password */}
                         <div className="form-control">
@@ -76,16 +111,6 @@ export const Register = () => {
                                     Must contain uppercase, number & special character
                                 </span>
                             )}
-                        </div>
-
-                        {/* Forgot password link */}
-                        <div className="text-right text-sm">
-                            <Link
-                                to="/forgot-password"
-                                className="link link-hover link-primary font-medium"
-                            >
-                                Forgot Password?
-                            </Link>
                         </div>
 
                         {/* Register Button */}

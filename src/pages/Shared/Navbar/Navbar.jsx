@@ -1,8 +1,10 @@
 import React from 'react'
 import { Logo } from '../../../components/logo/Logo'
-import { NavLink } from 'react-router'
+import { Link, NavLink } from 'react-router'
+import { useAuth } from '../../../hooks/useAuth'
 
 export const Navbar = () => {
+  const {user, logOut}=useAuth();
     const links=<>
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/services">Services</NavLink></li>
@@ -30,9 +32,22 @@ export const Navbar = () => {
         {links}
     </ul>
   </div>
-  <div className="navbar-end">
-    <a className="btn">Button</a>
+  <div className="navbar-end flex gap-4">
+     {
+      
+        user ? <button onClick={logOut} className="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary
+                         text-white font-bold py-3 px-10 rounded-full shadow-lg 
+                         transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-lg" >Logout</button> : <NavLink to="/auth/login" className="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary
+                         text-white font-bold py-3 px-10 rounded-full shadow-lg 
+                         transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-lg" > Login</NavLink>
+     }
+
+     <Link to='/be-a-rider' className="bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary
+                         text-white font-bold px-5 py-3 rounded-full shadow-lg 
+                         transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-lg"> Become rider</Link>
   </div>
 </div>
   )
+
 }
+

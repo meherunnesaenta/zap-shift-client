@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import { SocialLogin } from '../Auth/SocialLogin/SocialLogin';
+import Swal from 'sweetalert2';
 
 export const Login = () => {
-    const { register, handleSubmit, handleForget, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const { loginUser, forgetPassword } = useAuth();
     const handleLogin = async (data) => {
         loginUser(data.email, data.password)
@@ -14,21 +15,33 @@ export const Login = () => {
                 console.log(user);
             })
             .catch(err => console.log(err))
-    }   
-    const handleForgetPassword = (handleForget) => {
-        const email = prompt('Please enter your email address:');
+    }
+    const handleForgetPassword = (data) => {
+        const email = data.email;
         if (email) {
             forgetPassword(email)
                 .then(() => {
-                    alert('Password reset email sent. Please check your inbox.');
+                    Swal.fire({
+                        title: "Password reset email sent!",
+                        icon: "success",
+                        draggable: true,
+                        confirmButtonColor:"#CAEB66"
+                    });
                 })
-                .catch(err => console.log(err));
+                .catch(err => Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: err.message,
+                    footer: '<a href="#">Why do I have this issue?</a>',
+                    confirmButtonColor:"#CAEB66"
+                })
+                );
         } else {
             alert('Email address is required to reset password.');
         }
 
     }
-    
+
 
     return (
         <div className="w-full max-w-md mx-auto mt-8 px-4 sm:px-0">
@@ -83,8 +96,8 @@ export const Login = () => {
                             )}
                         </div>
                         <div className="text-right text-sm">
-                            <button
-                                onClick={() => handleForgetPassword(handleForget)}
+                            <button type="button"
+                                onClick={() => handleSubmit(handleForgetPassword)()}
                                 className="link link-hover link-primary font-medium"
                             >
                                 Forgot Password?
